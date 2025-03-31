@@ -28,7 +28,7 @@ from packaging.version import parse
 import torch.version
 from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 from setuptools import setup, Extension
-from cpufeature.extension import CPUFeature
+#from cpufeature.extension import CPUFeature
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension, CUDA_HOME
 
 class CpuInstructInfo:
@@ -75,6 +75,8 @@ class VersionInfo:
             raise ValueError("Unsupported platform: {}".format(sys.platform))
 
     def get_cpu_instruct(self,):
+        return "aarch64"
+        """
         if CpuInstructInfo.CPU_INSTRUCT == CpuInstructInfo.FANCY:
             return "fancy"
         elif CpuInstructInfo.CPU_INSTRUCT == CpuInstructInfo.AVX512:
@@ -112,7 +114,7 @@ class VersionInfo:
                 "Unsupported cpu Instructions: {}".format(str(CPUFeature)))
         else:
             raise ValueError("Unsupported platform: {}".format(sys.platform))
-
+        """
     def get_torch_version(self,):
         torch_version_raw = parse(torch.__version__)
         torch_version = f"{torch_version_raw.major}{torch_version_raw.minor}"
